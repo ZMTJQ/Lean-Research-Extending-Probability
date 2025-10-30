@@ -116,16 +116,13 @@ def nCk (n k : ℕ) : ℕ :=
   of nCk here.
 -/
 
-theorem nCk_zero (n : ℕ) (hk: fact n > 0): nCk n 0 = 1 := by
+theorem nCk_zero (n : ℕ): nCk n 0 = 1 := by
   dsimp nCk
-  split_ifs with h -- new for CS22
+  simp
   dsimp fact
   simp
-  reflexivity
-  -- the proof should not be this hard. I must be forgetting something
-  contradiction -- for second case
-
-  sorry
+  have hpos : 0 < fact n := fact_pos n
+  rw [Nat.div_self hpos] -- new tactic
 
 /-
 Exercise 2b.
@@ -136,8 +133,12 @@ all of them. We want to formalize the logic using the definition
   of nCk here.
 -/
 theorem nCk_self (n : ℕ) : nCk n n = 1 := by
-  sorry
-
+  dsimp nCk
+  simp
+  dsimp fact
+  simp
+  have hpos : 0 < fact n := fact_pos n
+  rw [Nat.div_self hpos] -- new tactic
 /-
 Exercise 2c.
 Prove that "choosing k items" is the same as "leaving out n − k items"
@@ -145,7 +146,10 @@ That is, show the symmetry of nCk.
 -/
 theorem nCk_symm (n k : ℕ) (hk : k ≤ n) :
     nCk n k = nCk n (n - k) := by
-  sorry
+  dsimp nCk
+  simp
+  split_ifs
+  -- these are equal, need to learn Lean syntax
 
 
 /-
