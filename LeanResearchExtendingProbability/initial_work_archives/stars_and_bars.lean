@@ -61,6 +61,9 @@ def nCk (n k : ℕ) : ℕ :=
   So we can think of this problem as "choosing k−1 positions for bars" out of
   n+k−1 total slots.
 -/
+-- What we want out of stars and bars? Not to prove
+-- why the formula works, but instead apply it as a tactic
+-- for other problems
 
 -- Task 1: Using this intuition and nCk from the last assignment, define stars_and_bars below.
 def stars_and_bars (n k : ℕ) : ℕ :=

@@ -6,6 +6,8 @@ This file is guided by the following two questions:
 
 1. How could we write a theorem like n-choose-k or stars and bars in Lean
 2. How do we imagine students writing a good proof about n-choose-k, stars and bars, etc in Lean?
+MOVING FORWARD, keep this in mind:
+3. How do we teach students about these concepts using Lean. Think applying these as formulas as tactics to problems formalized in Lean
 
 We have to keep in mind that CS22 is an introductory logic, discrete math, and probability course.
 CS22 is not meant to requiring vast Lean knowledge, but rather Lean should be a learning tool.
@@ -35,7 +37,7 @@ import BrownCs22.Library.Defs
 
 -------------------------
 /- PART 1: Factorials -/
--------------------------
+-------------------------=
 
 /- We can define our own factorial method-/
 def fact : ℕ → ℕ
@@ -89,6 +91,9 @@ theorem fact_succ (n : ℕ) : fact (n + 1) = (n + 1) * fact n := by
 -------------------------
 /- PART 2: Defining nCk -/
 -------------------------
+
+-- Note: Proving nCk is always a natural number is a theorem of interest
+-- We've seen division, GCD,etc at this point
 
 /- Recall, n choose k counts how many ways there are to choose
 k items from n. We'll write it as nCk, and define it using
@@ -150,8 +155,10 @@ theorem nCk_symm (n k : ℕ) (hk : k ≤ n) :
   simp
   split_ifs
   -- these are equal, need to learn Lean syntax
-
-
+  -- Note: could work with i + j choose i,
+  -- come up with a counting problem that is more friendly to Lean that is solved by nCk
+  -- Want to choose k things from n things, but we want to eliminate duplicates
+  --
 /-
   Note: the only thing we don't include now that we could
   is explictly proving why the n-choose-k formula is correct overall.
